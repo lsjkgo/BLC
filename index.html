@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Destrin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Premium Bootstrap 4 Landing Page Template" />
+<meta name="keywords" content="bootstrap 4, premium, marketing, multipurpose" />
+<meta content="Themesdesign" name="author" />
+<!-- favicon -->
+<link rel="shortcut icon" href="images/favicon.ico" />
+<!-- css -->
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<!-- icon -->
+<link href="css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="./swiper/swiper.min.css">
+<script src="./js/my.js"></script>
+</head>
+<style>
+  .client-images img {
+    opacity: 1;
+    width: 100px;
+  }
+  @media all and (max-width:1360px){
+    .txtCenter {
+      text-align: center;
+    }
+    .center {
+      display: flex; 
+      justify-content: center;
+    }
+  }
+  @media(min-width:768px) {
+    .mobaile {
+       display: none;
+    }
+}
+@media(max-width:768px) {
+    .mobaile {
+       display: block;
+       width: 45%;
+    font-size: 0.8rem;
+    padding: 10px 5px;
+      margin: 0 !important;
+    }
+    .content{
+      justify-content:none;
+    }
+    .acont{
+      font-size: 0.8rem !important;
+    width: 30%;
+    }
+}
+@media(max-width:335px) {
+    .mobaile {
+    font-size: 0.6rem;
+    width: 40%;
+    }
+    .acont{
+      font-size: 0.6rem !important;
+    }
+}
+    /* swiper */
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+	    transition: 300ms;
+	    transform: scale(0.8);
+    }
+	.swiper-slide-active,.swiper-slide-duplicate-active{
+      transform: scale(1);
+	}
+  .swiper-button-next {
+    top: 38%;
+    right: 10%;
+  }
+  .swiper-button-prev {
+    top: 38%;
+    left: 10%;
+  }
+  .swiper-button-prev:after,
+  .swiper-button-next:after {
+    font-size: 80px;
+  }
+  .boxStyle{
+    width: 220px;
+  }
+</style>
+<body>
+<!-- STRAT NAVBAR -->
+<div id="navbar">
+  <nav class="navbar navbar-expand-lg navbar-white fixed-top navbar-custom sticky sticky-dark" id="main-menu">
+    <div class="container content"><!-- LOGO --><a class="navbar-brand logo text-uppercase acont" href="#" style="font-size: 1.2rem;"><img src="images/logo-dark.png" style="margin-top: -3px;margin-right: 5px;" alt="" height="24" />Baby Love Cat</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><i class="mdi mdi-menu"></i></button>
+    
+          <button type="button" class="btn btn-primary mobaile" style="margin: 0 10px;"  onclick="initWallet()" id="select-address">Connect Wallet</button>
+     
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav navbar-center mx-auto" id="navbar-navlist">
+          <li class="nav-item"><a data-scroll href="#home" class="nav-link">Home</a></li>
+          <li class="nav-item"><a data-scroll href="#services" class="nav-link">Services</a></li>
+          <li class="nav-item"><a data-scroll href="#features" class="nav-link">Features</a></li>
+          <!-- <li class="nav-item"><a data-scroll href="#testimonial" class="nav-link">Testimonial</a></li> -->
+          <li class="nav-item"><a data-scroll href="#pricing" class="nav-link">Download</a></li>
+        </ul>
+        <div class="nav-button">
+          <ul class="list-inline nav-social d-none d-lg-inline-block  mb-0">
+            <button type="button" class="btn btn-primary" style="margin: 0 10px;"  onclick="initWallet()" id="select-address">Connect Wallet</button>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+<!-- END NAVBAR --><!--START HOME-->
+<section class="bg-home section bg-lightan" id="home">
+  <div class="home-overlay"></div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <p class="home-heading-title">Fun,Profitable GameFi</p>
+        <h1 class="home-title mt-3">BLC Is An Ecological Token Without Pre Excavation</h1>
+        <p class="home-desc text-muted mt-3">Jingle Cat Community Initiated The Decentralized Consensus Community Autonomy Ecology.</p>
+        <form class="mt-5 home-form rounded">
+          <div class="row" style="display: flex; justify-content: center;">
+            <div class="col-md-6">
+              <div class="form-group mb-0">
+                <input type="text" class="form-control" placeholder="Enter Your Amount">
+              </div>
+            </div>
+            <!--end col-->
+            <div class="col-md-3">
+              <div class="form-group home-button">
+                <input type="submit" id="search" name="search" class="btn btn-primary w-100" value="Mint">
+              </div>
+            </div>
+            <!--end col--></div>
+          <!--end row-->
+        </form>
+      </div>
+    </div>
+    <!-- 展示及选取盲盒区域 -->
+    <div class="row">
+      <div class="col-lg-12" style="margin-top: 50px;">
+        <div class="col-lg-8" style="margin: 0 auto;">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="boxStyle">
+                  <img src="./images/box.jpeg" style="width: 100%;">
+                  <h2>#404b67</h2>
+                </div></div>
+                <div class="swiper-slide">
+                  <div>
+                    <img src="./images/box.jpeg" style="width: 100%;">
+                    <h2>#404b67</h2>
+                  </div></div>
+                  <div class="swiper-slide">
+                    <div>
+                      <img src="./images/box.jpeg" style="width: 100%;">
+                      <h2>#404b67</h2>
+                    </div></div>
+           
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+        <div class="col-lg-2" style="margin: 0 auto; margin-top: 30px;">
+          <input type="submit" id="search" name="search" class="btn btn-primary w-100" value="Open">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--END HOME--><!-- START SERVICES -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="title-box text-center">
+          <h6 class="title-sub-title mb-0 text-primary">User Info</h6>
+          <h3 class="title-heading mt-3">User Registration, Recharge And Withdrawal Management System</h3>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5 pt-4">
+      <div class="col-lg-4">
+        <div class="service-box text-center uim-icon-primary mt-4" style="background-color: #f8fafd!important; padding-bottom: 50px!important;">
+         <h3 style="text-align: start;">REGISTR</h3>
+          <form>
+            <div class="form-group" style="text-align: start; margin-bottom: 10px;">
+              <label for="exampleInputEmail1" style="margin-bottom: 5px;">Account</label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="form-group" style="text-align: start; margin-bottom: 10px;">
+              <label for="exampleInputEmail1" style="margin-bottom: 5px;">Password</label>
+              <input type="password" class="form-control">
+            </div>
+            <div style="margin-top: 30px; display: flex; justify-content: center;">
+              <button type="button" class="btn btn-primary" style="margin: 0 10px;">approve</button>
+              <button type="button" class="btn btn-primary" style="margin: 0 10px;">REGISTER</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="service-box text-center uim-icon-primary mt-4" style="background-color: #f8fafd!important; padding-bottom: 50px!important;">
+          <h3 style="text-align: start;">RECHARGE</h3>
+           <form>
+            <div class="form-group" style="text-align: start; margin-bottom: 10px; margin-top: 50px;">
+              <label for="exampleInputEmail1" style="margin-bottom: 5px;">Number</label></label>
+              <input type="text" class="form-control">
+            </div>
+             <div style="margin-top: 70px; display: flex; justify-content: center;">
+               <button type="button" class="btn btn-primary">RECHARGE</button>
+             </div>
+           </form>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="service-box text-center uim-icon-primary mt-4" style="background-color: #f8fafd!important; padding-bottom: 50px!important;">
+          <h3 style="text-align: start;">WITHDRAW</h3>
+           <form>
+            <div class="form-group" style="text-align: start; margin-bottom: 10px; margin-top: 50px;">
+              <label for="exampleInputEmail1" style="margin-bottom: 5px;">Number</label></label>
+              <input type="text" class="form-control">
+            </div>
+            <div style="margin-top: 65px; display: flex; justify-content: center;">
+              <button type="button" class="btn btn-primary" style="margin: 0 10px;">WITHDRAW</button>
+              <button type="button" class="btn btn-primary" style="margin: 0 10px;">ClaimToken</button>
+            </div>
+           </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END SERVICES --> 
+
+<!-- START FEATURES -->
+
+<section class="section bg-light overflow-hidden" id="features">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="features-1 mt-4"> <img src="images/features/img-1.png" alt=""> </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="features-box mt-4">
+          <h3>The server runs and processes very fast</h3>
+          <p class="text-muted mt-3">We have a very powerful background management system, which can quickly solve the problems encountered by users and ensure the high-speed and stable operation of the game.</p>
+          <div class="mt-4 center"> 
+            <a href="">
+            <div class="read-more mt-3"> <span class="arrow text-dark">&#8594;</span> </div>
+            </a> 
+          </div>
+          <div class="row mt-4">
+            <div class="col-lg-6">
+              <div class="mt-4">
+                <div class="uim-icon-primary mt-4 center">
+                  <div class="features-icon icon-xl"> <i class="uim uim-window-section"></i> </div>
+                </div>
+                <h5 class="f-18 mt-4">Fast & Reliable </h5>
+                <p class="text-muted mt-2">Quickly and constantly solve user problems.</p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="mt-3">
+                <div class="uim-icon-primary mt-4 center">
+                  <div class="features-icon icon-xl"> <i class="uim uim-chart-pie"></i> </div>
+                </div>
+                <h5 class="f-18 mt-4">Data monitoring </h5>
+                <p class="text-muted">Ensure the stable operation of the game.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5 pt-5 align-items-center">
+      <div class="col-lg-6">
+        <div class="mt-4">
+          <h3 class="w-75">Game social interaction is also the direction of our careful research</h3>
+          <p class="text-muted mt-4">Pay attention to the playability and interactivity of the game while playing the game, and actively develop the social networking of the game.</p>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mt-4">
+                <h2>1535+</h2>
+                <h5 class="text-primary mb-0 f-16">Social Advice</h5>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mt-4">
+                <h2>530+</h2>
+                <h5 class="text-primary mb-0 f-16">Social C Circle</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="features-2 mt-4"> <img src="images/features/img-2.png" alt=""> </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END FEATURES --> 
+
+<!-- START Buy And Sale -->
+<!-- <section class="section" id="testimonial"> -->
+<div class="container"> 
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="title-box text-center">
+          <h6 class="title-sub-title mb-0 text-primary">BUY AND SALE</h6></h6>
+          <div style="margin-top: 20px;">
+            <button type="button" class="btn btn-primary buyBtn">BUY</button>
+            <button type="button" class="btn btn-primary buySale">SALE</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- BUY模块 -->
+    <div class="buy">
+      <div class="row" style="margin-top: 30px;">
+        <div class="col-lg-3" style="margin-top: 20px; display: flex; justify-content: center;">
+          <div>
+            <img src="./images/footer/1.png">
+            <h5>Name:<span>tradeNAme</span></h5>
+            <p>tradeId:<span>tradeId</span></p></p>
+          </div>
+        </div>
+        <div class="col-lg-3" style="margin-top: 20px; display: flex; justify-content: center;">
+          <div>
+            <img src="./images/footer/1.png">
+            <h5>Name:<span>tradeNAme</span></h5>
+            <p>tradeId:<span>tradeId</span></p></p>
+          </div>
+        </div>
+        <div class="col-lg-3" style="margin-top: 20px; display: flex; justify-content: center;">
+          <div>
+            <img src="./images/footer/1.png">
+            <h5>Name:<span>tradeNAme</span></h5>
+            <p>tradeId:<span>tradeId</span></p></p>
+          </div>
+        </div>
+        <div class="col-lg-3" style="margin-top: 20px; display: flex; justify-content: center;">
+          <div>
+            <img src="./images/footer/1.png">
+            <h5>Name:<span>tradeNAme</span></h5>
+            <p>tradeId:<span>tradeId</span></p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- SALE模块 -->
+    <div class="sale" style="display: none;">
+      <div class="row" style="margin-top: 30px;">
+        <div class="col-lg-12">
+          <div class="service-box text-center uim-icon-primary mt-4" style="background-color: #f8fafd!important; padding-bottom: 50px!important;">
+            <h3 style="text-align: start;">SALE</h3>
+             <form>
+              <div class="form-group" style="text-align: start; margin-bottom: 10px; margin-top: 50px;">
+                <label for="exampleInputEmail1" style="margin-bottom: 5px;">Name</label></label>
+                <input type="text" class="form-control">
+              </div>
+              <div class="form-group" style="text-align: start; margin-bottom: 10px; margin-top: 50px;">
+                <label for="exampleInputEmail1" style="margin-bottom: 5px;">TradeId</label></label>
+                <input type="text" class="form-control">
+              </div>
+              <div class="form-group" style="text-align: start; margin-bottom: 10px; margin-top: 50px;">
+                <label for="exampleInputEmail1" style="margin-bottom: 5px;">Amount</label></label>
+                <input type="text" class="form-control">
+              </div>
+              <div style="margin-top: 65px; display: flex; justify-content: center;">
+                <button type="button" class="btn btn-primary" style="margin: 0 10px;">SALE</button>
+              </div>
+             </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- </section> -->
+<!-- END TESTIMONIAL --><!-- START PRICING -->  
+
+<!-- END CONTACT --><!-- START FOOTER -->
+<section class="bg-footer bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="mt-4"><div><a class="navbar-brand logo text-uppercase" href="#" style="font-size: 1.2rem;color: #404b67;"><img src="images/logo-dark.png" style="margin-top: -3px;margin-right: 5px;" alt="" height="24" />Baby Love Cat</a></div>
+          <p class="text-muted mt-3 pt-1">Jingle Cat Community initiated the decentralized consensus community autonomy ecology,No project party,BLC is an ecological token without pre excavation.</p>
+          <div class="footer-social mt-4">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item"><a href="" class="text-reset"><i class="mdi mdi-telegram"></i></a></li>
+              <li class="list-inline-item"><a href="" class="text-reset"><i class="mdi mdi-twitter"></i></a></li>
+              <!-- <li class="list-inline-item"><a href="" class="text-reset"><i class="mdi mdi-google"></i></a></li>
+              <li class="list-inline-item"><a href="" class="text-reset"><i class="mdi mdi-pinterest"></i></a></li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7 offset-lg-1">
+        <div class="row txtCenter">
+          <div class="col-lg-4">
+            <div class="mt-4">
+              <h5 class="f-18">Link</h5>
+              <ul class="list-unstyled footer-link mt-3">
+                <li><a data-scroll href="#home">Home</a></li>
+                <li><a data-scroll href="#services">Services</a></li>
+                <li><a data-scroll href="#features">Features</a></li>
+          <!-- <li><a data-scroll href="#testimonial">Testimonial</a></li> -->
+                <li><a data-scroll href="#pricing">Download</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="mt-4 ps-0 ps-lg-5">
+              <h5 class="f-18">Support</h5>
+              <ul class="list-unstyled footer-link mt-3">
+                <li><a href="">Token</a></li>
+                <li><a href="">Team</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="mt-4 ps-0 ps-lg-5">
+              <h5 class="f-18">Resources</h5>
+              <ul class="list-unstyled footer-link mt-3">
+                <li><a href="">Twitter</a></li>
+                <li><a href="">Telegram</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-lg-3">
+        <div class="client-images mt-4"><img src="images/footer/1.png" alt="logo-img" class="mx-auto img-fluid d-block"></div>
+      </div>
+      <div class="col-lg-3">
+        <div class="client-images mt-4"><img src="images/footer/2.png" alt="logo-img" class="mx-auto img-fluid d-block" style="background-color: black;"></div>
+      </div>
+      <div class="col-lg-3 ">
+        <div class="client-images mt-4"><img src="images/footer/3.png" alt="logo-img" class="mx-auto img-fluid d-block"></div>
+      </div>
+      <div class="col-lg-3">
+        <div class="client-images mt-4"><img src="images/footer/4.png" alt="logo-img" class="mx-auto img-fluid d-block"></div>
+      </div>
+    </div>
+    <hr class="mt-5">
+    <div class="row mt-4">
+      <div class="col-lg-12">
+        <p class="text-center text-muted mb-0">2022 © Baby Love Cat <a href="http://www.jq22.com/">BLC</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END FOOTER -->
+<!-- javascript -->
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/smooth-scroll.polyfills.min.js"></script>
+<script src="js/gumshoe.polyfills.min.js"></script>
+<!-- unicons icon -->
+<script src="js/unicons.js"></script>
+<!-- Contact Form -->
+<script src="js/app.js"></script>
+<!-- swiper -->
+<script src="./swiper/swiper.min.js"></script>
+<script>
+  let buyBox = document.querySelector('.buy')
+  let buyBtn = document.querySelector('.buyBtn')
+  let saleBox = document.querySelector('.sale')
+  let saleBtn = document.querySelector('.buySale')
+  // 点击切换为Buy模块
+  buyBtn.addEventListener('click', function () {
+    saleBox.style.display = 'none'
+    buyBox.style.display = 'block'
+  })
+  // 点击切换为Sale模块
+  saleBtn.addEventListener('click', function () {
+    saleBox.style.display = 'block'
+    buyBox.style.display = 'none'
+  })
+  // swiper
+  var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 3,
+      spaceBetween: 30,
+	  centeredSlides: true,
+	  loop: true,
+    navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+    });
+</script>
+</body>
+</html>
+
