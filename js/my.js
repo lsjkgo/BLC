@@ -11,7 +11,7 @@ var inputPrivatekey;
 var currentAddress ;
 var invinteAdr = window.location.hash.slice(1);
 
-async function initWallet() {
+async function initWallet(str) {
     var web3Provider;
     if (window.ethereum) {
         web3Provider = window.ethereum;
@@ -29,10 +29,10 @@ async function initWallet() {
     web3 = new Web3(web3Provider);
     let provider = new ethers.providers.Web3Provider(web3.currentProvider);
     walletWithProvider = provider.getSigner();
-    inputPrivatekey = $('#select-address');
+    inputPrivatekey = $(str);
      privateAddress = await walletWithProvider.getAddress();
      currentAddress = privateAddress.slice(0,4)+"XXXXX"+privateAddress.slice(-4);
-    inputPrivatekey[0].innerHTML = privateAddress.slice(0,4)+"XXXXX"+privateAddress.slice(-4);
+    inputPrivatekey[0].innerHTML = currentAddress;
 }
 
 
