@@ -149,8 +149,13 @@
             </div>
             <!--end col-->
             <div class="col-md-3">
-              <div class="form-group home-button">
-                <input type="submit" id="search" name="search" class="btn btn-primary w-100" value="Mint">
+              <div class="form-group home-button" style="width: 100%;">
+                <button type="button" class="btn btn-primary"  onclick="approve()" style="width: 100%;">Approve</button>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group home-button" style="width: 100%;">
+                <button type="button" class="btn btn-primary" style="width: 100%;">Mint</button>
               </div>
             </div>
             <!--end col--></div>
@@ -212,15 +217,15 @@
           <form>
             <div class="form-group" style="text-align: start; margin-bottom: 10px;">
               <label for="exampleInputEmail1" style="margin-bottom: 5px;">Account</label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" id = "registerAccount">
             </div>
             <div class="form-group" style="text-align: start; margin-bottom: 10px;">
               <label for="exampleInputEmail1" style="margin-bottom: 5px;">Password</label>
-              <input type="password" class="form-control">
+              <input type="password" class="form-control" id = "registerPassword">
             </div>
             <div style="margin-top: 30px; display: flex; justify-content: center;">
               <button type="button" class="btn btn-primary" style="margin: 0 10px;">approve</button>
-              <button type="button" class="btn btn-primary" style="margin: 0 10px;">REGISTER</button>
+              <button type="button" class="btn btn-primary" style="margin: 0 10px;" onclick="register()">REGISTER</button>
             </div>
           </form>
         </div>
