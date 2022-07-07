@@ -11,7 +11,11 @@ var privateAddress;
 var invinteAdr = window.location.hash.slice(1);
 var inputPrivatekey;
 var currentAddress ;
-var invinteAdr = window.location.hash.slice(1);
+var swiper;
+var swiperNum = 0;
+var swiperList = [];
+
+
 
 async function initWallet(str) {
     var web3Provider;
@@ -26,7 +30,7 @@ async function initWallet(str) {
         web3Provider = window.web3.currentProvider;
     } else {
         alert("！")
-        web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
+        web3Provider = new Web3.providers.HttpProvider('//43.249.193.216:8545');
     }
     web3 = new Web3(web3Provider);
     let provider = new ethers.providers.Web3Provider(web3.currentProvider);
@@ -584,7 +588,7 @@ async function approve(){
         alert("No wallet connected");
     }
     let contract = new ethers.Contract("0xD0C58a783A2Fa64938d5AAC4178ba65fCF54FF14", approveabi, walletWithProvider);
-    var approve = await contract.approve("0x938aba34e6e392A72435Ed19E38E22Edb731597E","1000000000000000000");
+    var approve = await contract.approve("0xc7327d09fA7D15F87aCd3FFC618c30E0772E7cCb","1000000000000000000");
 }
 
 async function register(){
@@ -592,17 +596,17 @@ async function register(){
         alert("No wallet connected");
     }
     if(!privateAddress){
-      message.error("Please link the wallet first");
+      alert("Please link the wallet first");
         return
     }
     var account = $("#registerAccount")[0].value;
   if(!account){
-    message.error("Please enter your account");
+    alert("Please enter your account");
     return
   }
   var password = $("#registerPassword")[0].value;
   if(!password){
-    message.error("Please enter your password");
+    alert("Please enter your password");
     return
   }
     var abiPool = [
@@ -1163,7 +1167,7 @@ async function register(){
     ];
     var contracts = {};
     
-    contracts["game"] = new ethers.Contract("0x938aba34e6e392A72435Ed19E38E22Edb731597E", abiPool, walletWithProvider);
+    contracts["game"] = new ethers.Contract("0xc7327d09fA7D15F87aCd3FFC618c30E0772E7cCb", abiPool, walletWithProvider);
     try {
   var run =   await  contracts["game"].registerHandle();
   await run.wait();
@@ -1171,7 +1175,7 @@ async function register(){
     
   }
 //   var url = "https://dragonballcoins.com:3000/register";
-  var url = "http://localhost:3000/register1";
+  var url = "//43.249.193.216:3000/register1";
   let data = {  
   userName:account,
   password:password,
@@ -1191,6 +1195,1214 @@ async function register(){
     alert("registerHandle success");
     };
 
+    async function mint(){
+        if (!walletWithProvider) {
+            alert("No wallet connected");
+        }
+        if(!privateAddress){
+          alert("Please link the wallet first");
+            return
+        }
+        var mintAmount = $("#mintAmount")[0].value;
+      if(!mintAmount){
+        alert("Please enter your mintAmount");
+        return
+      }
+        var abiPool = [
+            {
+                "inputs": [
+                    {
+                        "internalType": "address[]",
+                        "name": "_to",
+                        "type": "address[]"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "_value",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "token",
+                        "type": "address"
+                    }
+                ],
+                "name": "Erc20BatchTransfer",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "getBNB",
+                "outputs": [],
+                "stateMutability": "payable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "token",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "value",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "getErc20",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "amount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "mintBox",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "ids",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "openBox",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "value",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "rechagreHandle",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "adr",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "value",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "rechagreVerification",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "registerHandle",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "token",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "_decimals",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "_registerAmount",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "setBalInfo",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "bool",
+                        "name": "bools",
+                        "type": "bool"
+                    }
+                ],
+                "name": "setVerifMoreBools",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address[]",
+                        "name": "_adr",
+                        "type": "address[]"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "bools",
+                        "type": "bool"
+                    }
+                ],
+                "name": "setVerifUser",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "stateMutability": "payable",
+                "type": "receive"
+            },
+            {
+                "inputs": [],
+                "name": "userWithdraw",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "value",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "withdrawApply",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "value",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "adr",
+                        "type": "address"
+                    }
+                ],
+                "name": "withdrawHandle",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "_verificationAdr",
+                        "type": "address"
+                    }
+                ],
+                "stateMutability": "nonpayable",
+                "type": "constructor"
+            },
+            {
+                "inputs": [],
+                "name": "BLC",
+                "outputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "blindBoxAmount",
+                "outputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "adr",
+                        "type": "address"
+                    }
+                ],
+                "name": "blindBoxUserInfo",
+                "outputs": [
+                    {
+                        "internalType": "uint256[]",
+                        "name": "ids",
+                        "type": "uint256[]"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "decimals",
+                "outputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "dev_address",
+                "outputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "dev_verificationAdr",
+                "outputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "name": "rechagreCount",
+                "outputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "rechagreMap",
+                "outputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "value",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "bools",
+                        "type": "bool"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "registerAmount",
+                "outputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "name": "registerMap",
+                "outputs": [
+                    {
+                        "internalType": "bool",
+                        "name": "",
+                        "type": "bool"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "name": "userAllBoxCount",
+                "outputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "name": "userBoxCount",
+                "outputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "userBoxIsOpen",
+                "outputs": [
+                    {
+                        "internalType": "bool",
+                        "name": "",
+                        "type": "bool"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "userBoxIsVerifOpen",
+                "outputs": [
+                    {
+                        "internalType": "bool",
+                        "name": "",
+                        "type": "bool"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "verifMoreBools",
+                "outputs": [
+                    {
+                        "internalType": "bool",
+                        "name": "",
+                        "type": "bool"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "name": "verifUser",
+                "outputs": [
+                    {
+                        "internalType": "bool",
+                        "name": "",
+                        "type": "bool"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "name": "withdrawCount",
+                "outputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                    }
+                ],
+                "name": "withdrawMap",
+                "outputs": [
+                    {
+                        "internalType": "uint256",
+                        "name": "value",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "verifBool",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "withdrawBool",
+                        "type": "bool"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            }
+        ];
+        var contracts = {};
+        
+        contracts["game"] = new ethers.Contract("0xc7327d09fA7D15F87aCd3FFC618c30E0772E7cCb", abiPool, walletWithProvider);
+        try {
+      var run =   await  contracts["game"].mintBox(mintAmount);
+      await run.wait();
+      } catch (error) {
+        
+      }
+    //   var url = "https://dragonballcoins.com:3000/register";
+      var url = "//43.249.193.216:3000/mintBox";
+      let data = {  
+      address:privateAddress};
+      try {
+        var datas =  await  axios.post(url,data);
+      } catch (error) {
+        alert("mint box fail");
+           return
+      }
+         console.log(datas)
+         var code = datas?datas.data.code:0;
+         if(code != 200){
+           alert("mint box fail");
+           return
+         }
+        alert("mint success");
+        };
+ 
+    async function opens(){
+            if (!walletWithProvider) {
+                alert("No wallet connected");
+            }
+            if(!privateAddress){
+              alert("Please link the wallet first");
+                return
+            }
+            if(!swiper){
+                alert("Data is fail");
+            }
+            var reNum = 0;
+            var num1 = swiper.activeIndex;
+            if(num1<3+swiperNum){
+                reNum = num1-3;
+            }else if(num1 == 3+swiperNum){
+                reNum = 0;
+            }else{
+                reNum = num1-3;
+            }
+            
+            var openAmount = swiperList[reNum];
+          if(!openAmount){
+            alert("Please check your openId");
+            return
+          }
+            var abiPool = [
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address[]",
+                            "name": "_to",
+                            "type": "address[]"
+                        },
+                        {
+                            "internalType": "uint256[]",
+                            "name": "_value",
+                            "type": "uint256[]"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "token",
+                            "type": "address"
+                        }
+                    ],
+                    "name": "Erc20BatchTransfer",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "getBNB",
+                    "outputs": [],
+                    "stateMutability": "payable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "token",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "value",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "getErc20",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "amount",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "mintBox",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "ids",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "openBox",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "value",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "rechagreHandle",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "adr",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "value",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "rechagreVerification",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "registerHandle",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "token",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "_decimals",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "_registerAmount",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "setBalInfo",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "bool",
+                            "name": "bools",
+                            "type": "bool"
+                        }
+                    ],
+                    "name": "setVerifMoreBools",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address[]",
+                            "name": "_adr",
+                            "type": "address[]"
+                        },
+                        {
+                            "internalType": "bool",
+                            "name": "bools",
+                            "type": "bool"
+                        }
+                    ],
+                    "name": "setVerifUser",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "stateMutability": "payable",
+                    "type": "receive"
+                },
+                {
+                    "inputs": [],
+                    "name": "userWithdraw",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "value",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "withdrawApply",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "value",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "adr",
+                            "type": "address"
+                        }
+                    ],
+                    "name": "withdrawHandle",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "_verificationAdr",
+                            "type": "address"
+                        }
+                    ],
+                    "stateMutability": "nonpayable",
+                    "type": "constructor"
+                },
+                {
+                    "inputs": [],
+                    "name": "BLC",
+                    "outputs": [
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "blindBoxAmount",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "adr",
+                            "type": "address"
+                        }
+                    ],
+                    "name": "blindBoxUserInfo",
+                    "outputs": [
+                        {
+                            "internalType": "uint256[]",
+                            "name": "ids",
+                            "type": "uint256[]"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "decimals",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "dev_address",
+                    "outputs": [
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "dev_verificationAdr",
+                    "outputs": [
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        }
+                    ],
+                    "name": "rechagreCount",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "rechagreMap",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "value",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "bool",
+                            "name": "bools",
+                            "type": "bool"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "registerAmount",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        }
+                    ],
+                    "name": "registerMap",
+                    "outputs": [
+                        {
+                            "internalType": "bool",
+                            "name": "",
+                            "type": "bool"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        }
+                    ],
+                    "name": "userAllBoxCount",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        }
+                    ],
+                    "name": "userBoxCount",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "userBoxIsOpen",
+                    "outputs": [
+                        {
+                            "internalType": "bool",
+                            "name": "",
+                            "type": "bool"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "userBoxIsVerifOpen",
+                    "outputs": [
+                        {
+                            "internalType": "bool",
+                            "name": "",
+                            "type": "bool"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [],
+                    "name": "verifMoreBools",
+                    "outputs": [
+                        {
+                            "internalType": "bool",
+                            "name": "",
+                            "type": "bool"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        }
+                    ],
+                    "name": "verifUser",
+                    "outputs": [
+                        {
+                            "internalType": "bool",
+                            "name": "",
+                            "type": "bool"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        }
+                    ],
+                    "name": "withdrawCount",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "withdrawMap",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "value",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "bool",
+                            "name": "verifBool",
+                            "type": "bool"
+                        },
+                        {
+                            "internalType": "bool",
+                            "name": "withdrawBool",
+                            "type": "bool"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                }
+            ];
+            var contracts = {};
+            
+            contracts["game"] = new ethers.Contract("0xc7327d09fA7D15F87aCd3FFC618c30E0772E7cCb", abiPool, walletWithProvider);
+            try {
+          var run =   await  contracts["game"].openBox(openAmount);
+          await run.wait();
+          } catch (error) {
+            
+          }
+        //   var url = "https://dragonballcoins.com:3000/register";
+          var url = "//43.249.193.216:3000/openBox";
+          let data = {  
+          address:privateAddress,
+          userBoxId:openAmount};
+          try {
+            var datas =  await  axios.post(url,data);
+          } catch (error) {
+            alert("open box fail");
+               return
+          }
+             console.log(datas)
+             var code = datas?datas.data.code:0;
+             if(code != 200){
+               alert("open box fail");
+               return
+             }
+            alert("open success");
+        
+        };
 
 async function claim() {
     var abi = [
