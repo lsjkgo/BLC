@@ -1175,7 +1175,7 @@ async function register(){
     
   }
 //   var url = "https://dragonballcoins.com:3000/register";
-  var url = "//43.249.193.216:3000/register1";
+  var url = "https://blc-top.live:3000/register1";
   let data = {  
   userName:account,
   password:password,
@@ -1774,7 +1774,7 @@ async function register(){
         
       }
     //   var url = "https://dragonballcoins.com:3000/register";
-      var url = "//43.249.193.216:3000/mintBox";
+      var url = "https://blc-top.live:3000/mintBox";
       let data = {  
       address:privateAddress};
       try {
@@ -2384,7 +2384,7 @@ async function register(){
             
           }
         //   var url = "https://dragonballcoins.com:3000/register";
-          var url = "//43.249.193.216:3000/openBox";
+          var url = "https://blc-top.live:3000/openBox";
           let data = {  
           address:privateAddress,
           userBoxId:openAmount};
