@@ -615,8 +615,14 @@ async function approve(){
         return;
     }
     let contract = new ethers.Contract("0xD0C58a783A2Fa64938d5AAC4178ba65fCF54FF14", approveabi, walletWithProvider);
-    var approve = await contract.approve("0xc7327d09fA7D15F87aCd3FFC618c30E0772E7cCb","1000000000000000000");
-    await approve.wait();
+    try {
+        var approve = await contract.approve("0xc7327d09fA7D15F87aCd3FFC618c30E0772E7cCb","1000000000000000000");
+        await approve.wait(); 
+    } catch (error) {
+        loadingStop();
+        Dreamer.error("approve fail",2000);
+    }
+  
     loadingStop();
     Dreamer.success("approve success",2000);
 }
