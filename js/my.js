@@ -6,7 +6,11 @@ var jqueryje = "./js/jquery.js";
 document.write('<scr' + 'ipt type="text/javascript" src="'+jqueryje+'"></scr' + 'ipt>');
 var axiosje = "./js/axios.js";
 document.write('<scr' + 'ipt type="text/javascript" src="'+axiosje+'"></scr' + 'ipt>');
-var walletWithProvider ;
+var loadingje = "./js/loading.js";
+document.write('<scr' + 'ipt type="text/javascript" src="'+loadingje+'"></scr' + 'ipt>');
+var messageje = "./js/message.js";
+document.write('<scr' + 'ipt type="text/javascript" src="'+messageje+'"></scr' + 'ipt>');
+var walletWithProvider;
 var privateAddress;
 var invinteAdr = window.location.hash.slice(1);
 var inputPrivatekey;
@@ -16,7 +20,27 @@ var swiperNum = 0;
 var swiperList = [];
 
 
+function loadingStart(){
+    $('body').loading({
+        loadingWidth:120,
+        title:'',
+        name:'test',
+        discription:'',
+        direction:'column',
+        type:'origin',
+        // originBg:'#71EA71',
+        originDivWidth:40,
+        originDivHeight:40,
+        originWidth:6,
+        originHeight:6,
+        smallLoading:false,
+        loadingMaskBg:'rgb(0 0 0 / 60%)'
+    });
+}
 
+function loadingStop(){
+    removeLoading('test');
+}
 async function initWallet(str) {
     var web3Provider;
     if (window.ethereum) {
@@ -43,6 +67,7 @@ async function initWallet(str) {
 
 
 async function approve(){
+    loadingStart();
     var approveabi=[
         {
             "inputs": [],
@@ -585,30 +610,37 @@ async function approve(){
         }
     ];
     if (!walletWithProvider) {
-        alert("No wallet connected");
+        loadingStop();
+        Dreamer.error("No wallet connected",2000);
+        return;
     }
     let contract = new ethers.Contract("0xD0C58a783A2Fa64938d5AAC4178ba65fCF54FF14", approveabi, walletWithProvider);
     var approve = await contract.approve("0xc7327d09fA7D15F87aCd3FFC618c30E0772E7cCb","1000000000000000000");
+    await approve.wait();
+    loadingStop();
+    Dreamer.success("approve success",2000);
 }
 
 async function register(){
     if (!walletWithProvider) {
-        alert("No wallet connected");
+        Dreamer.error("No wallet connected",2000);
+        return;
     }
     if(!privateAddress){
-      alert("Please link the wallet first");
+        Dreamer.error("Please link the wallet first",2000);
         return
     }
     var account = $("#registerAccount")[0].value;
   if(!account){
-    alert("Please enter your account");
+    Dreamer.error("Please enter your account",2000);
     return
   }
   var password = $("#registerPassword")[0].value;
   if(!password){
-    alert("Please enter your password");
+    Dreamer.error("Please enter your password",2000);
     return
   }
+  loadingStart();
     var abiPool = [
         {
             "inputs": [
@@ -1183,31 +1215,35 @@ async function register(){
   try {
     var datas =  await  axios.post(url,data);
   } catch (error) {
-    alert("register fail");
+    loadingStop();
+    Dreamer.error("register fail",2000);
        return
   }
      console.log(datas)
      var code = datas?datas.data.code:0;
      if(code != 200){
-       alert("register fail");
+        loadingStop();
+        Dreamer.error("register fail",2000);
        return
      }
-    alert("registerHandle success");
+     loadingStop();
+     Dreamer.success("registerHandle success",2000);
     };
 
     async function mint(){
         if (!walletWithProvider) {
-            alert("No wallet connected");
+            Dreamer.error("No wallet connected",2000);
         }
         if(!privateAddress){
-          alert("Please link the wallet first");
+            Dreamer.error("Please link the wallet first",2000);
             return
         }
         var mintAmount = $("#mintAmount")[0].value;
       if(!mintAmount){
-        alert("Please enter your mintAmount");
+        Dreamer.error("Please enter your mintAmount",2000);
         return
       }
+      loadingStart();
         var abiPool = [
             {
                 "inputs": [
@@ -1780,28 +1816,31 @@ async function register(){
       try {
         var datas =  await  axios.post(url,data);
       } catch (error) {
-        alert("mint box fail");
+        loadingStop();
+        Dreamer.error("mint box fail",2000);
            return
       }
          console.log(datas)
          var code = datas?datas.data.code:0;
          if(code != 200){
-           alert("mint box fail");
+            loadingStop();
+            Dreamer.error("mint box fail",2000);
            return
          }
-        alert("mint success");
+         loadingStop();
+         Dreamer.success("mint success",2000);
         };
  
     async function opens(){
             if (!walletWithProvider) {
-                alert("No wallet connected");
+                Dreamer.error("No wallet connected",2000);
             }
             if(!privateAddress){
-              alert("Please link the wallet first");
+                Dreamer.error("Please link the wallet first",2000);
                 return
             }
             if(!swiper){
-                alert("Data is fail");
+                Dreamer.error("Data is fail",2000);
             }
             var reNum = 0;
             var num1 = swiper.activeIndex;
@@ -1815,9 +1854,10 @@ async function register(){
             
             var openAmount = swiperList[reNum];
           if(!openAmount){
-            alert("Please check your openId");
+            Dreamer.error("Please check your openId",2000);
             return
           }
+          loadingStart();
             var abiPool = [
                 {
                     "inputs": [
@@ -2391,16 +2431,19 @@ async function register(){
           try {
             var datas =  await  axios.post(url,data);
           } catch (error) {
-            alert("open box fail");
+            loadingStop();
+            Dreamer.error("open box fail",2000);
                return
           }
              console.log(datas)
              var code = datas?datas.data.code:0;
              if(code != 200){
-               alert("open box fail");
+                loadingStop();
+                Dreamer.error("open box fail",2000);
                return
              }
-            alert("open success");
+             loadingStop();
+             Dreamer.success("open success",2000);
         
         };
 
